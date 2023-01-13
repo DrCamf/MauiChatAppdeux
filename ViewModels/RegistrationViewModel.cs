@@ -12,7 +12,7 @@ namespace MauiChatAppdeux.ViewModels
     internal class RegistrationViewModel : INotifyPropertyChanged
     {
         private INavigation _navigation;
-        public string webApiKey = "AIzaSyAiU45J9KkKI4WO4CV7Sj9jBcjXkUcZeyw";
+        public string webApiKey = "";
         private string email;
         private string password;
 
