@@ -87,11 +87,12 @@
                         Text="Register using Email" />
 
                     <Label
-                        Grid.Row="5"
-                        HorizontalOptions="CenterAndExpand"
-                        Text="or signin with" />
-                    <StackLayout
                         Grid.Row="6"
+                        Margin="0,-10,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Don't have an account? Sign up here" />
+                    <StackLayout
+                        Grid.Row="7"
                         HorizontalOptions="CenterAndExpand"
                         Orientation="Horizontal"
                         Spacing="40">
@@ -117,17 +118,21 @@
                             WidthRequest="30" />
                     </StackLayout>
                     <Label
-                        Grid.Row="7"
+                        Grid.Row="8"
                         FontAttributes="Bold"
                         HorizontalOptions="CenterAndExpand"
                         Text="Forget Password" />
-                    <Label
-                        Grid.Row="8"
-                        Margin="0,-10,0,0"
-                        HorizontalOptions="CenterAndExpand"
-                        Text="Don't have an account? Sign up here" />
+                    
                 </Grid>
             </Frame>
+
+           <!-- <Button
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" /> -->
+
         </Grid>
     </ContentPage.Content>
 

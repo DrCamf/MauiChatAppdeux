@@ -1,4 +1,13 @@
-﻿namespace MauiChatAppdeux;
+﻿#if IOS
+using Plugin.Firebase.iOS;
+#else
+using Microsoft.Maui.LifecycleEvents;
+using Plugin.Firebase.Android;
+using Plugin.Firebase.Auth;
+using Plugin.Firebase.Shared;
+#endif
+
+namespace MauiChatAppdeux;
 
 public static class MauiProgram
 {
@@ -15,4 +24,8 @@ public static class MauiProgram
 
 		return builder.Build();
 	}
+
+    
+
+    
 }

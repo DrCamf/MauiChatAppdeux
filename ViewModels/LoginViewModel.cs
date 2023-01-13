@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MauiChatAppdeux.Views;
 using Newtonsoft.Json;
 
 
@@ -10,7 +11,7 @@ namespace MauiChatAppdeux.ViewModels
 {
     internal class LoginViewModel
     {
-        public string webApiKey = "";
+        public string webApiKey = "AIzaSyAiU45J9KkKI4WO4CV7Sj9jBcjXkUcZeyw";
         private INavigation _navigation;
 
         public Command RegisterBtn { get; }
@@ -25,7 +26,7 @@ namespace MauiChatAppdeux.ViewModels
 
         private async void LoginBtnTappedAssync(object obj)
         {
-            await this._navigation.PushAsync(new Dashboard());
+            await this._navigation.PushAsync(new ChatRooms());
         }
 
         private async void RegisterBtnTappedAsync(object obj)
