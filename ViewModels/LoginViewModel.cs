@@ -11,7 +11,7 @@ namespace MauiChatAppdeux.ViewModels
 {
     internal class LoginViewModel
     {
-        public string webApiKey = "AIzaSyAiU45J9KkKI4WO4CV7Sj9jBcjXkUcZeyw";
+        public string webApiKey = "";
         private INavigation _navigation;
 
         public Command RegisterBtn { get; }
