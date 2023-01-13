@@ -6,7 +6,5 @@
               xmlns:templates="clr-namespace:ChatApp.Views.Templates"
               xmlns:viewmodel="clr-namespace:ChatApp.ViewModels"
              >
-    <ContentPage.BindingContext>
-        <viewmodel:HomeViewModel />
-    </ContentPage.BindingContext>
+    
 </ContentPage>
