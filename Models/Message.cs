@@ -4,8 +4,9 @@ namespace MauiChatAppdeux.Models
 {
     public class Message
     {
-        public User Sender { get; set; }
-        public string Text { get; set; }
-        public string Time { get; set; }
+        public string name { get; set; }
+        public string image { get; set; }
+        public string chattext { get; set; }
+        public string date { get; set; }
     }
 }

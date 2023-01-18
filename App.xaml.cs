@@ -1,4 +1,7 @@
-﻿namespace MauiChatAppdeux;
+﻿using MauiChatAppdeux.ViewModels;
+using MauiChatAppdeux.Views;
+
+namespace MauiChatAppdeux;
 
 public partial class App : Application
 {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiChatAppdeux.ChatPage"
+             Title="ChatPage">
+    
+        <ScrollView Margin="10" BackgroundColor="White">
+            <CollectionView ItemsSource="{Binding MessagesCollection}" BackgroundColor="White">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Border >
+                            <Grid ColumnDefinitions="Auto, *" RowSpacing="0" Margin="12, 24" BackgroundColor="White">
+                                <Grid>
+                                    <Image Source="{Binding image}"   WidthRequest="50" HeightRequest="50"  />
+                                </Grid>
+                                <Grid Grid.Column="1" ColumnDefinitions="*, Auto" BackgroundColor="White">
+                                    <StackLayout>
+                                        <Label Text="{Binding name}" Margin="0,0,0,5" TextColor="Black"/>
+                                        <Label Text="{Binding chattext}"  TextColor="Black" />
+                                    </StackLayout>
+                                    <Label Grid.Column="1"  Text="{Binding date}" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>  
+            </CollectionView>
+        </ScrollView>
+  
+</ContentPage>

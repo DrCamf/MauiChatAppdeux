@@ -77,14 +77,14 @@
                         BackgroundColor="#1C375C"
                         Command="{Binding LoginBtn}"
                         CornerRadius="20"
-                        Text="Login" />
+                        Text="Login" TextColor="White"/>
 
                     <Button
                         Grid.Row="5"
                         BackgroundColor="#1C375C"
                         Command="{Binding RegisterBtn}"
                         CornerRadius="20"
-                        Text="Register using Email" />
+                        Text="Register using Email" TextColor="White"/>
 
                     <Label
                         Grid.Row="6"

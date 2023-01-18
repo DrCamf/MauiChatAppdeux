@@ -4,8 +4,8 @@ namespace MauiChatAppdeux.Models
 {
     public class User
     {
-        public string Name { get; set; }
-        public string Image { get; set; }
+        public string name { get; set; }
+        public string image { get; set; }
         public Color Color { get; set; }
     }
 }
