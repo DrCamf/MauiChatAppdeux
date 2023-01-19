@@ -17,6 +17,8 @@ namespace MauiChatAppdeux.ViewModels
     {
         ObservableCollection<Message> _message;
         private List<Message> messageCollection = new List<Message>();
+
+        public string AreaName { get; set; }
         public ChatViewModel(int id)
         {
             var response = new List<Message>(ChatServices.Instance.GetLastFittyChats(id));
@@ -24,6 +26,7 @@ namespace MauiChatAppdeux.ViewModels
             {
                 message.image = "https://mauichat.elthoro.dk/" + message.image;
                 messageCollection.Add(message);
+                AreaName = message.Area;
             }
         }
 

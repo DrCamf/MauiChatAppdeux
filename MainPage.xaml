@@ -63,13 +63,16 @@
                         Margin="0,20,0,0"
                         HorizontalOptions="FillAndExpand"
                         Placeholder="Username"
-                        Text="{Binding UserName}"
+                        TextColor="Black"
+                        Keyboard="Email"
+                        Text="{Binding UserName }"
                         VerticalOptions="FillAndExpand" />
                     <Entry
                         Grid.Row="3"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
                         Placeholder="Password"
+                        TextColor="Black"
                         Text="{Binding UserPassword}"
                         VerticalOptions="FillAndExpand" />
                     <Button

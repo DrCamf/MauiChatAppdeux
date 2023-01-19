@@ -49,6 +49,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="1.1.0" />
+	  <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	  <PackageReference Include="Plugin.Firebase" Version="1.2.5" />
 	  <PackageReference Include="Plugin.FirebaseAuth" Version="4.1.0" />

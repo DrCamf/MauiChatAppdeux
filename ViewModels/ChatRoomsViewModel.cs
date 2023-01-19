@@ -25,6 +25,8 @@ namespace MauiChatAppdeux.ViewModels
         public Area SelectedArea { get; set; }
         ObservableCollection<Area> _area;
         public Command SelectedAreas { get; }
+
+        
         public ChatRoomsViewModel(INavigation navigation)
         {
             //LoadData();

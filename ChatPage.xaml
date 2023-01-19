@@ -2,29 +2,65 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiChatAppdeux.ChatPage"
+             NavigationPage.HasNavigationBar="False"
              Title="ChatPage">
-    
-        <ScrollView Margin="10" BackgroundColor="White">
-            <CollectionView ItemsSource="{Binding MessagesCollection}" BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NameTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+                <Setter Property="FontAttributes" Value="Italic"  />
+                <Setter Property="Margin" Value="0, 0, 0, 5" />
+            </Style>
+            <Style x:Key="ChatTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+               
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Margin="5"
+          RowDefinitions="Auto,*,Auto" BackgroundColor="#1C375C">
+        <Label Margin="5, 0, 0, 0" Text="{Binding AreaName}" Grid.Row="0" />
+        <ScrollView Margin="5" BackgroundColor="White" Grid.Row="1"
+                   >
+            <CollectionView ItemsSource="{Binding MessagesCollection}"  Grid.Row="1">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <Border >
-                            <Grid ColumnDefinitions="Auto, *" RowSpacing="0" Margin="12, 24" BackgroundColor="White">
+                        <Border BackgroundColor="White">
+                            
+                            <Grid ColumnDefinitions="Auto, *" RowSpacing="0" Margin="7, 5, 7, 10" >
                                 <Grid>
-                                    <Image Source="{Binding image}"   WidthRequest="50" HeightRequest="50"  />
+                                    <Image Source="{Binding image}"   WidthRequest="40" HeightRequest="40"  />
                                 </Grid>
-                                <Grid Grid.Column="1" ColumnDefinitions="*, Auto" BackgroundColor="White">
-                                    <StackLayout>
-                                        <Label Text="{Binding name}" Margin="0,0,0,5" TextColor="Black"/>
-                                        <Label Text="{Binding chattext}"  TextColor="Black" />
+                                
+                                <Grid Grid.Column="1" ColumnDefinitions="*, Auto" >
+                                    <StackLayout Margin="5,0,0,0" Grid.Column="0">
+                                            <Grid ColumnDefinitions="*, *" >
+                                            <Label Grid.Column="0"  Text="{Binding name}" Style="{StaticResource NameTextStyle}" />
+                                            <Label Grid.Column="01"  Margin="10, 0, 0,0" Text="{Binding date}" FontSize="12" TextColor="Black" FontFamily="Metropolis Regular"/>
+                                            </Grid>
+                                        
+                                        <Label Text="{Binding chattext}" Style="{StaticResource ChatTextStyle}"/>
+                                       
                                     </StackLayout>
-                                    <Label Grid.Column="1"  Text="{Binding date}" />
+                                    
                                 </Grid>
                             </Grid>
+                                
+                           
                         </Border>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>  
+                </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-  
+        <StackLayout Grid.Row="2">
+            <Entry BackgroundColor="White" TextColor="Black" Margin="2, 0"/>
+            <Button Text="SEND" BackgroundColor="BurlyWood" TextColor="Black" Margin="5" />
+        </StackLayout>
+        
+    </Grid>
+
 </ContentPage>
