@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
+
+
 using Firebase.Auth;
 using Firebase.RemoteConfig;
 using GalaSoft.MvvmLight;
@@ -25,9 +25,8 @@ namespace MauiChatAppdeux.ViewModels
    
 
 
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        ToastDuration duration = ToastDuration.Short;
-        private INavigation _navigation;
+   
+       
 
         public Command RegisterBtn { get; }
         public Command LoginBtn { get; }
@@ -44,68 +43,67 @@ namespace MauiChatAppdeux.ViewModels
 
        
 
-        public LoginViewModel(INavigation navigation)
+        public LoginViewModel()
         {
-            this._navigation = navigation;
-            RegisterBtn = new Command(RegisterBtnTappedAsync);
+           // this._navigation = navigation;
+           // RegisterBtn = new Command(RegisterBtnTappedAsync);
             LoginBtn = new Command(LoginBtnTappedAssync);
         }
 
         private async void LoginBtnTappedAssync(object obj)
         {
-            UserName = UserName;
-            UserPassword = UserPassword;
+            await Shell.Current.GoToAsync(nameof(ChatRooms));
+            /*UserName = UserName;
+            UserPassword = UserPassword;*/
+            /*
+                        if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(UserPassword))
+                        {
+                           /* var response = await _loginService.Authenticate(new LoginRequest
+                            {
+                                email = UserName,
+                                password = UserPassword
+                            });
 
-            if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(UserPassword))
-            {
-                var response = await _loginService.Authenticate(new LoginRequest
-                {
-                    email = UserName,
-                    password = UserPassword
-                });
+                            if (!string.IsNullOrWhiteSpace(response.name))
+                            {
+                                var userDetails = new UserBasicInfo
+                                {
+                                    email = UserName,
 
-                if (!string.IsNullOrWhiteSpace(response.name))
-                {
-                    var userDetails = new UserBasicInfo
-                    {
-                        email = UserName,
+                                };
 
-                    };
+                                if (Preferences.ContainsKey(nameof(App.UserDetails)))
+                                {
+                                    Preferences.Remove(nameof(App.UserDetails));
+                                }
 
-                    if (Preferences.ContainsKey(nameof(App.UserDetails)))
-                    {
-                        Preferences.Remove(nameof(App.UserDetails));
-                    }
+                                string userDetailStr = JsonConvert.SerializeObject(userDetails);
+                                Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                                App.UserDetails = userDetails;*/
+           // await Shell.Current.GoToAsync("ChatRooms");          //this._navigation.PushAsync(new ChatRooms());
 
-                    string userDetailStr = JsonConvert.SerializeObject(userDetails);
-                    Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                    App.UserDetails = userDetails;
-                    await this._navigation.PushAsync(new ChatRooms());
-
-                }
+               /* }
                 else
                 {
-                    var toast = Toast.Make("Invalid User", duration);
-                    await toast.Show(cancellationTokenSource.Token); 
+                   
                         //    await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
-                }
+                }*/
 
-            }
+            /*}
             else
             {
-                var toast = Toast.Make("Invalid User", duration);
-                await toast.Show(cancellationTokenSource.Token);
-                await this._navigation.PushAsync(new ChatRooms());
-            }
+                await Shell.Current.GoToAsync(nameof(ChatRooms));
+                // await    .PushAsync(new ChatRooms());
+            }*/
 
-
+    
 
         }
 
-        private async void RegisterBtnTappedAsync(object obj)
+       /* private async void RegisterBtnTappedAsync(object obj)
         {
-            await this._navigation.PushAsync(new RegisterPage());
-        }
+            //await this._navigation.PushAsync(new RegisterPage());
+        }*/
 
       
 

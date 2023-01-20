@@ -1,14 +1,16 @@
 ﻿
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace MauiChatAppdeux.ViewModels.Base
 {
-    public partial class ViewModelBase : BindableObject
+    public partial class ViewModelBase : ObservableObject
     {
-        
+        [ObservableProperty]
+        private bool _isBusy;
 
-        public virtual Task InitializeAsync(object navigationData)
-        {
-            return Task.FromResult(false);
-        }
+        [ObservableProperty]
+        private string _title;
+
     }
 }

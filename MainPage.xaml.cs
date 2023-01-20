@@ -10,7 +10,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		BindingContext = new LoginViewModel(Navigation);
+		BindingContext = new LoginViewModel();
 	}
 
     /*private async void OnCounterClicked(object sender, EventArgs e)

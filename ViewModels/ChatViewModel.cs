@@ -36,7 +36,7 @@ namespace MauiChatAppdeux.ViewModels
             set
             {
                 _message = value;
-                OnPropertyChanged();
+               // OnPropertyChanged();
             }
         }
         public List<Message> MessagesCollection

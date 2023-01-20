@@ -4,7 +4,11 @@ using Plugin.Firebase.iOS;
 
 
 #endif
-using CommunityToolkit.Maui;
+
+using MauiChatAppdeux.Services;
+using MauiChatAppdeux.ViewModels;
+using MauiChatAppdeux.Views;
+
 namespace MauiChatAppdeux;
 
 public static class MauiProgram
@@ -14,7 +18,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+            
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -27,7 +31,24 @@ public static class MauiProgram
                 fonts.AddFont("MaterialIcons-Regular.ttf", "Material Icons");
             });
 
-       
+
+        builder.Services.AddSingleton<ChatAreaServices>();
+        builder.Services.AddSingleton<ChatServices>();
+        builder.Services.AddSingleton<ILoginService, LoginService>();
+
+        //views
+        builder.Services.AddTransient<ChatPage>();
+        builder.Services.AddTransient<ChatRooms>();
+        builder.Services.AddTransient<RegisterPage>();
+        builder.Services.AddSingleton<HomeView>();
+
+
+        //viewmodel
+        builder.Services.AddTransient<ChatRoomsViewModel>();
+        builder.Services.AddTransient<ChatViewModel>();
+        builder.Services.AddSingleton<LoginViewModel>();
+        builder.Services.AddTransient<RegistrationViewModel>();
+
 
         return builder.Build();
 	}

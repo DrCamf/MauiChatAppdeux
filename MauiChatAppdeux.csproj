@@ -48,7 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="1.1.0" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 	  <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	  <PackageReference Include="Plugin.Firebase" Version="1.2.5" />
@@ -57,16 +57,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="ChatPage.xaml">
+	  <MauiXaml Update="Views\ChatDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Dashboard.xaml">
+	  <MauiXaml Update="Views\ChatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Dashboard.xaml">
 	    <Generator></Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RegisterPage.xaml">
+	  <MauiXaml Update="Views\RegisterPage.xaml">
 	    <Generator></Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ChatRooms.xaml">
+	  <MauiXaml Update="Views\ChatRooms.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeView.xaml">

@@ -1,7 +1,6 @@
 ﻿
 
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
+
 using MauiChatAppdeux.Models;
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
@@ -19,18 +18,17 @@ namespace MauiChatAppdeux.ViewModels
     {
         
         private List<Area> areasCollection = new List<Area>();
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        ToastDuration duration = ToastDuration.Short;
-        private INavigation _navigation;
+      
+       
         public Area SelectedArea { get; set; }
         ObservableCollection<Area> _area;
         public Command SelectedAreas { get; }
 
         
-        public ChatRoomsViewModel(INavigation navigation)
+        public ChatRoomsViewModel()
         {
             //LoadData();
-            this._navigation = navigation;
+            //this._navigation = navigation;
             SelectedAreas = new Command(SelectedAreaTappedAsync);
             var response = new List<Area>(ChatAreaServices.Instance.GetAllAreas());
             foreach (Area area in response.ToArray())
@@ -46,7 +44,7 @@ namespace MauiChatAppdeux.ViewModels
             /*var text = SelectedArea.Id.ToString();
             var toast = Toast.Make(text + " hej", duration);
             await toast.Show(cancellationTokenSource.Token);*/
-            await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
+           // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
         }
 
         public ObservableCollection<Area> Areas
@@ -55,7 +53,7 @@ namespace MauiChatAppdeux.ViewModels
             set
             {
                 _area = value;
-                OnPropertyChanged();
+               // OnPropertyChanged();
             }
         }
 
