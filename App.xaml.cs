@@ -1,6 +1,6 @@
 ﻿using MauiChatAppdeux.Models;
 using MauiChatAppdeux.ViewModels;
-using MauiChatAppdeux.Views;
+
 
 namespace MauiChatAppdeux;
 
@@ -11,6 +11,6 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new NavigationPage(new HomeView());
-	}
+		MainPage = new AppShell();
+    }
 }

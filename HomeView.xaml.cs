@@ -1,6 +1,6 @@
 using MauiChatAppdeux.ViewModels;
 
-namespace MauiChatAppdeux.Views;
+namespace MauiChatAppdeux;
 
 public partial class HomeView : ContentPage
 {

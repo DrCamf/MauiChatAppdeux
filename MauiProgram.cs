@@ -7,7 +7,7 @@ using Plugin.Firebase.iOS;
 
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels;
-using MauiChatAppdeux.Views;
+
 
 namespace MauiChatAppdeux;
 

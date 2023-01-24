@@ -6,15 +6,12 @@
     xmlns:local="clr-namespace:MauiChatAppdeux"
     Shell.FlyoutBehavior="Disabled">
 
-    <TabBar Route="Main">
-    
-        <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:ChatRooms}"
-        Route="ChatRooms" />
-        <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:ChatPage}"
-        Route="ChatPage" />
+    <TabBar Route="profile">
+
+
+        <ShellContent Route="main" ContentTemplate="{DataTemplate local:HomeView}" />
+        <ShellContent  Route="chatarea" ContentTemplate="{DataTemplate local:ChatRooms}" />
+        <ShellContent  Route="register" ContentTemplate="{DataTemplate local:RegisterPage}" />
+        <ShellContent  Route="chat" ContentTemplate="{DataTemplate local:ChatPage}" />
     </TabBar>
 </Shell>

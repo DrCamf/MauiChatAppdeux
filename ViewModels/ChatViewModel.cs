@@ -8,19 +8,19 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using System.Web;
 
 namespace MauiChatAppdeux.ViewModels
 {
-    public class ChatViewModel : ViewModelBase
+    public class ChatViewModel : ViewModelBase, IQueryAttributable
     {
         ObservableCollection<Message> _message;
         private List<Message> messageCollection = new List<Message>();
-
+        private int idfromarea;
         public string AreaName { get; set; }
-        public ChatViewModel(int id)
+        public ChatViewModel()
         {
+            int id = idfromarea;
             var response = new List<Message>(ChatServices.Instance.GetLastFittyChats(id));
             foreach (Message message in response.ToArray())
             {
@@ -43,6 +43,12 @@ namespace MauiChatAppdeux.ViewModels
         {
             get { return messageCollection; }
             set { messageCollection = value; }
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            string id = HttpUtility.UrlDecode(query["ID"].ToString());
+            idfromarea = int.Parse(id);
         }
     }
 }

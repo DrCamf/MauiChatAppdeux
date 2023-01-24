@@ -60,19 +60,19 @@
 	  <MauiXaml Update="Views\ChatDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ChatPage.xaml">
+	  <MauiXaml Update="ChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboard.xaml">
 	    <Generator></Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RegisterPage.xaml">
+	  <MauiXaml Update="RegisterPage.xaml">
 	    <Generator></Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ChatRooms.xaml">
+	  <MauiXaml Update="ChatRooms.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\HomeView.xaml">
+	  <MauiXaml Update="HomeView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -90,5 +90,7 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
 		<BundleResource Include="GoogleService-Info.plist" />
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMauiChatAppdeuxHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

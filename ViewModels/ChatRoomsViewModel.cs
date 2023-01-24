@@ -44,7 +44,9 @@ namespace MauiChatAppdeux.ViewModels
             /*var text = SelectedArea.Id.ToString();
             var toast = Toast.Make(text + " hej", duration);
             await toast.Show(cancellationTokenSource.Token);*/
-           // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
+            // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
+            int id = SelectedArea.Id;
+            await Shell.Current.GoToAsync($"//profile/chat?ID={id}");
         }
 
         public ObservableCollection<Area> Areas

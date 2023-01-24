@@ -12,7 +12,7 @@ using GalaSoft.MvvmLight;
 using MauiChatAppdeux.Models;
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
-using MauiChatAppdeux.Views;
+using MauiChatAppdeux;
 using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -24,14 +24,10 @@ namespace MauiChatAppdeux.ViewModels
         private readonly ILoginService _loginService;
    
 
-
-   
-       
-
         public Command RegisterBtn { get; }
         public Command LoginBtn { get; }
-        public string UserName { get; private set; }
-        public string UserPassword { get; private set; }
+        //public string UserName { get; private set; }
+       // public string UserPassword { get; private set; }
 
        
 
@@ -46,13 +42,13 @@ namespace MauiChatAppdeux.ViewModels
         public LoginViewModel()
         {
            // this._navigation = navigation;
-           // RegisterBtn = new Command(RegisterBtnTappedAsync);
+            RegisterBtn = new Command(RegisterBtnTappedAsync);
             LoginBtn = new Command(LoginBtnTappedAssync);
         }
 
         private async void LoginBtnTappedAssync(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(ChatRooms));
+            await Shell.Current.GoToAsync("//profile/chatarea");
             /*UserName = UserName;
             UserPassword = UserPassword;*/
             /*
@@ -80,14 +76,14 @@ namespace MauiChatAppdeux.ViewModels
                                 string userDetailStr = JsonConvert.SerializeObject(userDetails);
                                 Preferences.Set(nameof(App.UserDetails), userDetailStr);
                                 App.UserDetails = userDetails;*/
-           // await Shell.Current.GoToAsync("ChatRooms");          //this._navigation.PushAsync(new ChatRooms());
+            // await Shell.Current.GoToAsync("ChatRooms");          //this._navigation.PushAsync(new ChatRooms());
 
-               /* }
-                else
-                {
-                   
-                        //    await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
-                }*/
+            /* }
+             else
+             {
+
+                     //    await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
+             }*/
 
             /*}
             else
@@ -96,14 +92,16 @@ namespace MauiChatAppdeux.ViewModels
                 // await    .PushAsync(new ChatRooms());
             }*/
 
-    
+
 
         }
 
-       /* private async void RegisterBtnTappedAsync(object obj)
+        private async void RegisterBtnTappedAsync(object obj)
         {
-            //await this._navigation.PushAsync(new RegisterPage());
-        }*/
+            await Shell.Current.GoToAsync("//profile/register");
+
+
+        }
 
       
 

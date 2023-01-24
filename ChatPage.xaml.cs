@@ -3,11 +3,11 @@ using MauiChatAppdeux.ViewModels;
 namespace MauiChatAppdeux;
 
 public partial class ChatPage : ContentPage {
-	private int _id;
-	public ChatPage(int id)
+
+	public ChatPage()
 	{
 		InitializeComponent();
-		_id = id;
-        BindingContext = new ChatViewModel(_id);
+		
+        BindingContext = new ChatViewModel();
     }
 }
