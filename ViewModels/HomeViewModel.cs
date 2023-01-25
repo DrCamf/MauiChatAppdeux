@@ -1,4 +1,6 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -10,5 +12,6 @@ namespace MauiChatAppdeux.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
+       
     }
 }

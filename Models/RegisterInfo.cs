@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MauiChatAppdeux.Models
 {
-    public class UserBasicInfo
+    public class RegisterInfo
     {
+        public string email { get; set; }
+        public string pass { get; set; }
         public string name { get; set; }
-        public string Email { get; set; }
-        public int Id { get; set; }
         public string image { get; set; }
     }
 }

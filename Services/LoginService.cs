@@ -13,7 +13,7 @@ namespace MauiChatAppdeux.Services
     {
         public async Task<User> Authenticate(LoginRequest loginRequest)
         {
-            string encoded = System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(loginRequest.email + ":" + loginRequest.password));
+            string encoded = System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(loginRequest.Email + ":" + loginRequest.Password));
 
             var url = "https://mauichat.elthoro.dk/basic.php";
 

@@ -8,28 +8,45 @@ using System.Threading.Tasks;
 
 using Firebase.Auth;
 using Firebase.RemoteConfig;
-using GalaSoft.MvvmLight;
+
 using MauiChatAppdeux.Models;
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
 using MauiChatAppdeux;
 using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
-
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MauiChatAppdeux.ViewModels 
 {
-    internal class LoginViewModel : Base.ViewModelBase
+    public partial class LoginViewModel : ViewModelBase
     {
         private readonly ILoginService _loginService;
    
 
         public Command RegisterBtn { get; }
-        public Command LoginBtn { get; }
-        //public string UserName { get; private set; }
-       // public string UserPassword { get; private set; }
+        public Command LoginCommand { get; }
 
        
+        private string email;
+
+        
+        private string password;
+
+        public string Email
+        {
+            get => email;
+            set => SetProperty(ref email, value);
+        }
+
+        public string Password
+        {
+            get => password;    
+            set => SetProperty(ref password, value);
+        }
+        
+
 
         public LoginViewModel(ILoginService loginService)
         {
@@ -43,12 +60,45 @@ namespace MauiChatAppdeux.ViewModels
         {
            // this._navigation = navigation;
             RegisterBtn = new Command(RegisterBtnTappedAsync);
-            LoginBtn = new Command(LoginBtnTappedAssync);
+            LoginCommand = new Command(async () => await LoginCommandTappedAsync());
         }
 
-        private async void LoginBtnTappedAssync(object obj)
+       
+        async Task LoginCommandTappedAsync()
         {
-            await Shell.Current.GoToAsync("//profile/chatarea");
+            if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
+            {
+               try
+               {
+                    LoginRequest requestInfo = new LoginRequest();
+                    requestInfo.Email = Email;
+                    requestInfo.Password = Password;
+
+                    var response = await _loginService.Authenticate(requestInfo);
+                    if (response.Id > 0)
+                    {
+
+                        await Shell.Current.GoToAsync("//profile/chatarea");
+
+                    } else
+                    {
+                        await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
+                    }
+                } catch (Exception ex)
+                {
+                    await AppShell.Current.DisplayAlert("Failure", ex.Message, "OK");
+                }
+                
+
+                
+               
+            } else
+            {
+                await AppShell.Current.DisplayAlert("Invalid User", "No input", "OK");
+            }
+
+            
+               
             /*UserName = UserName;
             UserPassword = UserPassword;*/
             /*

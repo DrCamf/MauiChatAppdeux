@@ -7,6 +7,6 @@ public partial class HomeView : ContentPage
 	public HomeView()
 	{
 		InitializeComponent();
-        BindingContext = new LoginViewModel();
+		BindingContext = new LoginViewModel();
     }
 }

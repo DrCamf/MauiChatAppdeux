@@ -1,16 +1,27 @@
 ﻿
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MauiChatAppdeux.ViewModels.Base
 {
+    
     public partial class ViewModelBase : ObservableObject
     {
         [ObservableProperty]
-        private bool _isBusy;
-
+        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
+        bool isBusy;
+       
         [ObservableProperty]
-        private string _title;
+        string title;
 
+        public bool IsNotBusy => !IsBusy;
+
+        public ViewModelBase()
+        {
+
+        }
+      
     }
 }
