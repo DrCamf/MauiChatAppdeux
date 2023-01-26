@@ -34,6 +34,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<ChatAreaServices>();
         builder.Services.AddSingleton<ChatServices>();
+        builder.Services.AddSingleton<RegisterService>();
         builder.Services.AddSingleton<ILoginService, LoginService>();
 
         //views

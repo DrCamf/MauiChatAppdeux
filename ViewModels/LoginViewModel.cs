@@ -6,24 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-using Firebase.Auth;
-using Firebase.RemoteConfig;
+
 
 using MauiChatAppdeux.Models;
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
 using MauiChatAppdeux;
 using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RestSharp;
 
 namespace MauiChatAppdeux.ViewModels 
 {
     public partial class LoginViewModel : ViewModelBase
     {
         private readonly ILoginService _loginService;
-   
+        private LoginService loginService;
 
         public Command RegisterBtn { get; }
         public Command LoginCommand { get; }
@@ -46,16 +46,6 @@ namespace MauiChatAppdeux.ViewModels
             set => SetProperty(ref password, value);
         }
         
-
-
-        public LoginViewModel(ILoginService loginService)
-        {
-            _loginService = loginService;
-
-        }
-
-       
-
         public LoginViewModel()
         {
            // this._navigation = navigation;
@@ -73,76 +63,65 @@ namespace MauiChatAppdeux.ViewModels
                     LoginRequest requestInfo = new LoginRequest();
                     requestInfo.Email = Email;
                     requestInfo.Password = Password;
+                 
+                    User loginuser = new User();
+                    UserBasicInfo userinfo = new UserBasicInfo();
+                    string encoded = System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(requestInfo.Email + ":" + requestInfo.Password));
 
-                    var response = await _loginService.Authenticate(requestInfo);
-                    if (response.Id > 0)
+                    var url = "https://mauichat.elthoro.dk/basic.php";
+
+
+                    using (var client = new RestClient(url))
                     {
+                        var request = new RestRequest(url, Method.Get);
+                        request.AddHeader("Authorization", "Basic " + encoded);
+                        var body = @"";
+                        request.AddParameter("application/json", body, ParameterType.RequestBody);
+                        RestResponse response = await client.ExecuteAsync(request);
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
 
-                        await Shell.Current.GoToAsync("//profile/chatarea");
+                            var json = response.Content.ToString();
 
-                    } else
-                    {
-                        await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
+                            loginuser = JsonConvert.DeserializeObject<User>(json);
+                            userinfo.id = loginuser.id;
+                            userinfo.name = loginuser.name;
+                            userinfo.email = loginuser.email;
+                            userinfo.image = loginuser.image;
+
+
+                            App.UserDetails = userinfo;
+
+                            if (Preferences.ContainsKey(nameof(App.UserDetails)))
+                            {
+                                Preferences.Remove(nameof(App.UserDetails));
+                            }
+
+                            string userDetailStr = JsonConvert.SerializeObject(userinfo);
+                            Preferences.Set(nameof(App.UserDetails), userDetailStr);
+                            App.UserDetails = userinfo;
+
+                            //await AppShell.Current.DisplayAlert("valid User", "correct", "OK");
+                            await Shell.Current.GoToAsync("//profile/chatarea");
+                        }
+                        else
+                        {
+                            await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
+                        }
                     }
+                        // response = await loginService.Authenticate(requestInfo);
+
+                   
                 } catch (Exception ex)
                 {
                     await AppShell.Current.DisplayAlert("Failure", ex.Message, "OK");
                 }
-                
-
-                
-               
+     
             } else
             {
+                //await Shell.Current.GoToAsync("//profile/chatarea");
                 await AppShell.Current.DisplayAlert("Invalid User", "No input", "OK");
             }
-
-            
-               
-            /*UserName = UserName;
-            UserPassword = UserPassword;*/
-            /*
-                        if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(UserPassword))
-                        {
-                           /* var response = await _loginService.Authenticate(new LoginRequest
-                            {
-                                email = UserName,
-                                password = UserPassword
-                            });
-
-                            if (!string.IsNullOrWhiteSpace(response.name))
-                            {
-                                var userDetails = new UserBasicInfo
-                                {
-                                    email = UserName,
-
-                                };
-
-                                if (Preferences.ContainsKey(nameof(App.UserDetails)))
-                                {
-                                    Preferences.Remove(nameof(App.UserDetails));
-                                }
-
-                                string userDetailStr = JsonConvert.SerializeObject(userDetails);
-                                Preferences.Set(nameof(App.UserDetails), userDetailStr);
-                                App.UserDetails = userDetails;*/
-            // await Shell.Current.GoToAsync("ChatRooms");          //this._navigation.PushAsync(new ChatRooms());
-
-            /* }
-             else
-             {
-
-                     //    await AppShell.Current.DisplayAlert("Invalid User", "Incorrect", "OK");
-             }*/
-
-            /*}
-            else
-            {
-                await Shell.Current.GoToAsync(nameof(ChatRooms));
-                // await    .PushAsync(new ChatRooms());
-            }*/
-
-
 
         }
 

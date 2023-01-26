@@ -9,6 +9,8 @@
             Text="Chat Rooms!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label Text="{Binding Areanbr}" TextColor="White" VerticalOptions="Center" 
+            HorizontalOptions="Center" />
         <CollectionView ItemsSource="{Binding AreasCollection}" SelectionMode="Single" SelectedItem="{Binding SelectedArea}" SelectionChangedCommand="{Binding SelectedAreas}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

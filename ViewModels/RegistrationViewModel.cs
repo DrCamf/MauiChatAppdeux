@@ -84,6 +84,7 @@ namespace MauiChatAppdeux.ViewModels
             if (response)
             {
                 await AppShell.Current.DisplayAlert("User Created", "Succes", "OK");
+                await Shell.Current.GoToAsync("//profile/main");
             } else
             {
                 await AppShell.Current.DisplayAlert("User Created", "No Succes", "OK");

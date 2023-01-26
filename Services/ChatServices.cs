@@ -46,5 +46,34 @@ namespace MauiChatAppdeux.Services
             }
 
         }
+
+        public bool InsertMessage(SendMessage message)
+        {
+            var url = "https://mauichat.elthoro.dk";
+            var client = new RestClient(url);
+            var apiurl = "/?pass=chat";
+            
+            var request = new RestRequest(apiurl, Method.Post);
+            string output = JsonConvert.SerializeObject(message);
+            RestResponse response;
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            request.AddJsonBody(output);
+            try
+            {
+                response = client.Execute(request);
+
+                if (response.IsSuccessful)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } catch (Exception ex) { return false; }
+            
+           
+        }
     }
 }

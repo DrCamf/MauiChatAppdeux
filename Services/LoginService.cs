@@ -38,5 +38,35 @@ namespace MauiChatAppdeux.Services
                 }
             }
         }
+
+        public async Task<User> LoginControl(LoginRequest loginRequest)
+        {
+            string encoded = System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(loginRequest.Email + ":" + loginRequest.Password));
+            User loginuser = new User();
+            var url = "https://mauichat.elthoro.dk/basic.php";
+
+            using (var client = new RestClient(url))
+            {
+                var request = new RestRequest(url, Method.Get);
+                request.AddHeader("Authorization", "Basic " + encoded);
+                var body = @"";
+                request.AddParameter("application/json", body, ParameterType.RequestBody);
+                RestResponse response = await client.ExecuteAsync(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+
+                    var json = response.Content.ToString();
+                    loginuser = JsonConvert.DeserializeObject<User>(json);
+                    return loginuser;
+                    // return null;
+                }
+                else
+                {
+                    return loginuser;
+                }
+            }
+        }
     }
+
+   
 }

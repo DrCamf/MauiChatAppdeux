@@ -1,9 +1,11 @@
 ﻿
 
 
+
 using MauiChatAppdeux.Models;
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,10 +25,20 @@ namespace MauiChatAppdeux.ViewModels
         public Area SelectedArea { get; set; }
         ObservableCollection<Area> _area;
         public Command SelectedAreas { get; }
-
+        private int areanbr;
+        public int Areanbr { get; set; }
         
+
+
         public ChatRoomsViewModel()
         {
+           
+            if (Preferences.ContainsKey(nameof(App.ChosenArea)))
+            {
+                Preferences.Clear(nameof(App.ChosenArea));
+            }
+            App.ChosenArea = new Area();
+            SelectedArea = null;
             //LoadData();
             //this._navigation = navigation;
             SelectedAreas = new Command(SelectedAreaTappedAsync);
@@ -35,6 +47,7 @@ namespace MauiChatAppdeux.ViewModels
             {
                 area.image = "https://mauichat.elthoro.dk/" + area.image;
                 areasCollection.Add(area);
+                
             }
             
         }
@@ -45,8 +58,20 @@ namespace MauiChatAppdeux.ViewModels
             var toast = Toast.Make(text + " hej", duration);
             await toast.Show(cancellationTokenSource.Token);*/
             // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
-            int id = SelectedArea.Id;
-            await Shell.Current.GoToAsync($"//profile/chat?ID={id}");
+            //var response = ChatAreaServices.Instance.GetArea(SelectedArea.id);
+
+            await AppShell.Current.DisplayAlert("AHHA", SelectedArea.id.ToString(), "OK");
+            App.ChosenArea = SelectedArea;
+
+            await AppShell.Current.DisplayAlert("AHHA", App.ChosenArea.id.ToString(), "OK");
+
+
+
+
+
+            //await AppShell.Current.DisplayAlert("Area", App.ChosenArea.id.ToString(), "OK");
+
+            await Shell.Current.GoToAsync($"//profile/chat");
         }
 
         public ObservableCollection<Area> Areas

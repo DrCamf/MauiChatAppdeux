@@ -47,28 +47,51 @@ namespace MauiChatAppdeux.Services
 
         }
 
-       /* public List<Area> GetAreas()
+        public Area GetArea(int id)
         {
-            return new List<Area>
-            {
+            //Adress of API
+            var url = "https://mauichat.elthoro.dk";
+            var client = new RestClient(url);
 
-                new Area {
-                    name= "World war 1",
-                    picture_path="https://mauichat.elthoro.dk/Areaimages/ww1.jpg"
-                },
+            //The keys for the right API search
+            var apiurl = "/?pass=area&id=" + id;
+            var request = new RestRequest(apiurl, Method.Get);
+
+            RestResponse response = client.Execute(request);
+
+            if (response.IsSuccessful)
+            {
+                return JsonConvert.DeserializeObject<Area>(response.Content);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        /* public List<Area> GetAreas()
+         {
+             return new List<Area>
+             {
+
                  new Area {
-                    name= "World war 2",
-                    picture_path="https://mauichat.elthoro.dk/Areaimages/ww2.jpg"
-                },
+                     name= "World war 1",
+                     picture_path="https://mauichat.elthoro.dk/Areaimages/ww1.jpg"
+                 },
                   new Area {
-                    name= "Franco Prussian war",
-                    picture_path="https://mauichat.elthoro.dk/Areaimages/prussian.jpg"
-                },
+                     name= "World war 2",
+                     picture_path="https://mauichat.elthoro.dk/Areaimages/ww2.jpg"
+                 },
                    new Area {
-                    name= "Vietnam war",
-                    picture_path="https://mauichat.elthoro.dk/Areaimages/vietnam.jpg"
-                },
-            };
-        }*/
+                     name= "Franco Prussian war",
+                     picture_path="https://mauichat.elthoro.dk/Areaimages/prussian.jpg"
+                 },
+                    new Area {
+                     name= "Vietnam war",
+                     picture_path="https://mauichat.elthoro.dk/Areaimages/vietnam.jpg"
+                 },
+             };
+         }*/
     }
 }
