@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiChatAppdeux.ChatPage"
-             NavigationPage.HasNavigationBar="False"
+             x:Class="MauiChatAppdeux.Chat2Page"
+              NavigationPage.HasNavigationBar="False"
              Title="ChatPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -17,7 +17,7 @@
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="13" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
-               
+
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -28,33 +28,33 @@
             <Label Text="New messages: " Margin="5, 0, 0, 0"  TextColor="White"/>
             <Label Margin="10 ,0,0,0" Text="{Binding Count}"  TextColor="White"/>
         </StackLayout>
-       
-       
 
-           
+
+
+
 
         <ScrollView Margin="5" BackgroundColor="White" Grid.Row="1">
             <CollectionView ItemsSource="{Binding MessagesCollection}"  Grid.Row="1">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <Border BackgroundColor="White">
-                            
+
                             <Grid ColumnDefinitions="Auto, *" RowSpacing="0" Margin="7, 5, 7, 10" >
                                 <Grid>
                                     <Image Source="{Binding image}"   WidthRequest="40" HeightRequest="40"  />
                                 </Grid>
-                                
+
                                 <Grid Grid.Column="1" ColumnDefinitions="*, Auto" >
                                     <StackLayout Margin="5,0,0,0" Grid.Column="0">
-                                            <Grid ColumnDefinitions="*, *" >
+                                        <Grid ColumnDefinitions="*, *" >
                                             <Label Grid.Column="0"  Text="{Binding name}" Style="{StaticResource NameTextStyle}" />
                                             <Label Grid.Column="01"  Margin="10, 0, 0,0" Text="{Binding date}" FontSize="12" TextColor="Black" FontFamily="Metropolis Regular"/>
-                                            </Grid>
+                                        </Grid>
 
                                         <Label Text="{Binding chattext}" Style="{StaticResource ChatTextStyle}" TextColor="Black" />
-                                       
+
                                     </StackLayout>
-                                    
+
                                 </Grid>
                             </Grid>
                         </Border>
@@ -62,20 +62,19 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-       
+
         <StackLayout Grid.Row="2">
             <Border  StrokeThickness="2">
                 <Entry BackgroundColor="White" TextColor="Black" Margin="8, 0" Text="{Binding ChatSend}"  />
             </Border>
-            
+
             <Grid ColumnDefinitions="*, *">
-                
+
                 <Button Text="TILBAGE" BackgroundColor="BurlyWood" TextColor="Black" Margin="5" Command="{Binding BackCommand}"/>
                 <Button Grid.Column="1" Text="SEND" BackgroundColor="BurlyWood" TextColor="Black" Margin="5" Command="{Binding SendChatCommand}"/>
             </Grid>
-           
-        </StackLayout>
-        
-    </Grid>
 
+        </StackLayout>
+
+    </Grid>
 </ContentPage>

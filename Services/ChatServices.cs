@@ -24,7 +24,7 @@ namespace MauiChatAppdeux.Services
             }
         }
 
-        public List<Message> GetLastFittyChats(int id) 
+        public static List<Message> GetLastFittyChats(int id) 
         {
             //Adress of API
             var url = "https://mauichat.elthoro.dk";
@@ -34,7 +34,7 @@ namespace MauiChatAppdeux.Services
             var apiurl = "/?pass=chat&item=fifty&id=" + id;
             var request = new RestRequest(apiurl, Method.Get);
 
-            RestResponse response = client.Execute(request);
+            RestResponse response =  client.Execute(request);
 
             if (response.IsSuccessful)
             {
@@ -47,7 +47,7 @@ namespace MauiChatAppdeux.Services
 
         }
 
-        public bool InsertMessage(SendMessage message)
+        public async Task<bool> InsertMessage(SendMessage message)
         {
             var url = "https://mauichat.elthoro.dk";
             var client = new RestClient(url);
@@ -55,13 +55,15 @@ namespace MauiChatAppdeux.Services
             
             var request = new RestRequest(apiurl, Method.Post);
             string output = JsonConvert.SerializeObject(message);
+
+            //AppShell.Current.DisplayAlert("Chat", "tekst: " + output, "OK");
             RestResponse response;
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Accept", "application/json");
             request.AddJsonBody(output);
             try
             {
-                response = client.Execute(request);
+                response = await client.ExecuteAsync(request);
 
                 if (response.IsSuccessful)
                 {

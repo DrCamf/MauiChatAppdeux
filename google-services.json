@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:480939772271:android:7729e1c8bc00c6f5c7409a",
+        "android_client_info": {
+          "package_name": "com.company.MauiChatAppDeux"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480939772271-ntte9sqq0t5i3bectvuanjuf1215b58v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALyJH9TrEDuL0TQ2ZaKliSi7j2_8ED1xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480939772271-ntte9sqq0t5i3bectvuanjuf1215b58v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:480939772271:android:8542dc337c7f04f9c7409a",
         "android_client_info": {
           "package_name": "com.companyname.mauichatappdeux"

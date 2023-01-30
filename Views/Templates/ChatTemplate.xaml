@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiChatAppdeux.Views.Templates.ChatTemplate"
+              
+             >
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NameTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+                <Setter Property="FontAttributes" Value="Italic"  />
+                <Setter Property="Margin" Value="0, 0, 0, 5" />
+            </Style>
+            <Style x:Key="ChatTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+               
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        
+                    <Border BackgroundColor="White">
+
+                        <Grid ColumnDefinitions="Auto, *" RowSpacing="0" Margin="7, 5, 7, 10" >
+                            <Grid>
+                                <Image Source="{Binding image}"   WidthRequest="40" HeightRequest="40"  />
+                            </Grid>
+
+                            <Grid Grid.Column="1" ColumnDefinitions="*, Auto" >
+                                <StackLayout Margin="5,0,0,0" Grid.Column="0">
+                                    <Grid ColumnDefinitions="*, *" >
+                                        <Label Grid.Column="0"  Text="{Binding name}" Style="{StaticResource NameTextStyle}" />
+                                        <Label Grid.Column="01"  Margin="10, 0, 0,0" Text="{Binding date}" FontSize="12" TextColor="Black" FontFamily="Metropolis Regular"/>
+                                    </Grid>
+
+                                    <Label Text="{Binding chattext}" Style="{StaticResource ChatTextStyle}" TextColor="Black" />
+
+                                </StackLayout>
+
+                            </Grid>
+                        </Grid>
+                    </Border>
+                
+       
+    </ContentView.Content>
+   
+
+</ContentView>

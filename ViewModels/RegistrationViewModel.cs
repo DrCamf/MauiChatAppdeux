@@ -1,6 +1,4 @@
 ﻿
-
-
 using System.ComponentModel;
 using Firebase.Auth;
 using GalaSoft.MvvmLight;
@@ -35,7 +33,6 @@ namespace MauiChatAppdeux.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
-
         public string Password
         {
             get => password; set
@@ -52,7 +49,6 @@ namespace MauiChatAppdeux.ViewModels
                 RaisePropertyChanged("Name");
             }
         }
-
         public string PicturePath
         {
             get => picturepath; set
@@ -67,13 +63,11 @@ namespace MauiChatAppdeux.ViewModels
 
         public RegistrationViewModel() 
         {
-            
             RegisterUser = new Command(async () => await RegisterUserTappedAsync());
         }
 
         private async Task RegisterUserTappedAsync()
         { 
-
             RegisterInfo info = new RegisterInfo();
             info.email = Email;
             info.pass = Password;
@@ -91,27 +85,6 @@ namespace MauiChatAppdeux.ViewModels
             }
         }
 
-        /* private async void RegisterUserTappedAsync(object obj)
-          {
-              CrossFirebaseAuth mAuth;
-              try
-              {
-
-
-                  var result = await CrossFirebaseAuth.Current.Instance.CreateUserWithEmailAndPasswordAsync(email, password);         //Instance.CreateUserWithEmailAndPasswordAsync();
-
-                  var authProvider = FirebaseAuth.GetInstance(new FirebaseConfig(webApiKey));
-                  var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(Email, Password);
-                  string token = auth.FirebaseToken;
-                  if (token != null)
-                      await App.Current.MainPage.DisplayAlert("Alert", "User Registered successfully", "OK");
-                  await this._navigation.PopAsync();
-              }
-              catch (Exception ex)
-              {
-                  await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
-                  throw;
-             }
-          }*/
+       
     }
 }

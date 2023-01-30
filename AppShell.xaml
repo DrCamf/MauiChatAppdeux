@@ -10,8 +10,18 @@
 
 
         <ShellContent Route="main" ContentTemplate="{DataTemplate local:HomeView}" />
-        <ShellContent  Route="chatarea" ContentTemplate="{DataTemplate local:ChatRooms}" />
+        
         <ShellContent  Route="register" ContentTemplate="{DataTemplate local:RegisterPage}" />
+       
+    </TabBar>
+    <TabBar Route="middle">
+        <ShellContent  Route="chatarea" ContentTemplate="{DataTemplate local:ChatRooms}" />
+    </TabBar>
+    <TabBar Route="inside">
         <ShellContent  Route="chat" ContentTemplate="{DataTemplate local:ChatPage}" />
+        <ShellContent  Route="chat1" ContentTemplate="{DataTemplate local:Chat1Page}" />
+        <ShellContent  Route="chat2" ContentTemplate="{DataTemplate local:Chat2Page}" />
+        <ShellContent  Route="chat3" ContentTemplate="{DataTemplate local:Chat3Page}" />
+        <ShellContent  Route="chat4" ContentTemplate="{DataTemplate local:Chat4Page}" />
     </TabBar>
 </Shell>

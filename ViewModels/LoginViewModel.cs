@@ -22,16 +22,10 @@ namespace MauiChatAppdeux.ViewModels
 {
     public partial class LoginViewModel : ViewModelBase
     {
-        private readonly ILoginService _loginService;
-        private LoginService loginService;
-
         public Command RegisterBtn { get; }
         public Command LoginCommand { get; }
-
-       
+               
         private string email;
-
-        
         private string password;
 
         public string Email
@@ -102,7 +96,7 @@ namespace MauiChatAppdeux.ViewModels
                             App.UserDetails = userinfo;
 
                             //await AppShell.Current.DisplayAlert("valid User", "correct", "OK");
-                            await Shell.Current.GoToAsync("//profile/chatarea");
+                            await Shell.Current.GoToAsync("//middle/chatarea");
                         }
                         else
                         {
@@ -120,6 +114,8 @@ namespace MauiChatAppdeux.ViewModels
             } else
             {
                 //await Shell.Current.GoToAsync("//profile/chatarea");
+               // App.UserDetails.id = 50;
+                //await Shell.Current.GoToAsync("//middle/chatarea");
                 await AppShell.Current.DisplayAlert("Invalid User", "No input", "OK");
             }
 

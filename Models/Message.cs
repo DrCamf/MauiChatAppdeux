@@ -9,6 +9,6 @@ namespace MauiChatAppdeux.Models
         public string name { get; set; }
         public string image { get; set; }
         public string chattext { get; set; }
-        public string date { get; set; }
+        public string time { get; set; }
     }
 }

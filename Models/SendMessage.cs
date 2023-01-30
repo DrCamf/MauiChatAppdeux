@@ -8,10 +8,10 @@ namespace MauiChatAppdeux.Models
 {
     public class SendMessage
     {
-        public int chatarea_id { get; set; }
-        public int user_id { get; set; }
-
         public string chattext { get; set; }
-        public string date { get; set; }
+        public int user_id { get; set; }
+        public int chatarea_id { get; set; }
+             
+        public string time { get; set; }
     }
 }

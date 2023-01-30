@@ -27,16 +27,24 @@ namespace MauiChatAppdeux.ViewModels
         public Command SelectedAreas { get; }
         private int areanbr;
         public int Areanbr { get; set; }
+        ObservableCollection<Page> _pages;
         
 
 
         public ChatRoomsViewModel()
         {
+            /*var myExistingPageList = Shell.Current.Navigation.NavigationStack.ToList();
+            foreach (var item in myExistingPageList)
+            {
+                _pages.Add(item);
+            }
+            Shell.Current.Navigation.PopAsync();
+            
            
             if (Preferences.ContainsKey(nameof(App.ChosenArea)))
             {
                 Preferences.Clear(nameof(App.ChosenArea));
-            }
+            }*/
             App.ChosenArea = new Area();
             SelectedArea = null;
             //LoadData();
@@ -60,18 +68,36 @@ namespace MauiChatAppdeux.ViewModels
             // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
             //var response = ChatAreaServices.Instance.GetArea(SelectedArea.id);
 
-            await AppShell.Current.DisplayAlert("AHHA", SelectedArea.id.ToString(), "OK");
+           // await AppShell.Current.DisplayAlert("AHHA", SelectedArea.id.ToString(), "OK");
             App.ChosenArea = SelectedArea;
 
-            await AppShell.Current.DisplayAlert("AHHA", App.ChosenArea.id.ToString(), "OK");
+           // await AppShell.Current.DisplayAlert("AHHA", App.ChosenArea.id.ToString(), "OK");
 
-
+            switch(SelectedArea.id)
+            {
+                case 1:
+                    App.ChosenArea.name = "World war 1";
+                    await Shell.Current.GoToAsync($"//inside/chat1");
+                    break;
+                case 2:
+                    App.ChosenArea.name = "World war 2";
+                    await Shell.Current.GoToAsync($"//inside/chat2");
+                    break; 
+                case 3:
+                    App.ChosenArea.name = "Franco-Prussian War";
+                    await Shell.Current.GoToAsync($"//inside/chat3");
+                    break;
+                case 4:
+                    App.ChosenArea.name = "Vietnam War";
+                    await Shell.Current.GoToAsync($"//inside/chat4");
+                    break;
+            }
 
 
 
             //await AppShell.Current.DisplayAlert("Area", App.ChosenArea.id.ToString(), "OK");
 
-            await Shell.Current.GoToAsync($"//profile/chat");
+            //await Shell.Current.GoToAsync($"//inside/chat");
         }
 
         public ObservableCollection<Area> Areas
@@ -88,11 +114,16 @@ namespace MauiChatAppdeux.ViewModels
         {
             Areas = new ObservableCollection<Area>(ChatAreaServices.Instance.GetAllAreas());
         }
+
+       public ObservableCollection<Page> pages
+        { get { return _pages; } }
        
         public List<Area> AreasCollection
         {
             get { return areasCollection; }
             set { areasCollection = value; }
         }
+
+
     }
 }
