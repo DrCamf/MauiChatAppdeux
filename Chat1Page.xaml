@@ -19,66 +19,49 @@
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
                
             </Style>
+            <Style x:Key="ChatButton" TargetType="Button" >
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="BurlyWood" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            <Style x:Key="ChatScroll" TargetType="ScrollView">
+                <Setter Property="BackgroundColor" Value="white" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+           
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid Margin="5"
-          RowDefinitions="Auto,*,Auto" BackgroundColor="#1C375C">
+    <Grid RowDefinitions="Auto,*,Auto" Style="{DynamicResource BackGrid}">
+        
+        <!-- The Top -->
         <StackLayout Orientation="Horizontal" Grid.Row="0">
             <Label Margin="5, 0, 0, 0" Text="{Binding AreaName}"   TextColor="White"/>
             <Label Text="New messages: " Margin="5, 0, 0, 0"  TextColor="White"/>
             <Label Margin="10 ,0,0,0" Text="{Binding Count}"  TextColor="White"/>
         </StackLayout>
-       
-       
 
-           
 
-        <ScrollView Margin="5" BackgroundColor="White" Grid.Row="1">
+        <!-- The Chat -->
+
+        <ScrollView Grid.Row="1" Style="{StaticResource ChatScroll}">
             <CollectionView ItemsSource="{Binding MessagesCollection}"  Grid.Row="1">
                 <CollectionView.ItemTemplate >
-                    <DataTemplate  >
+                    <DataTemplate>
                         <templates:ChatTemplate/>
-
-
-
-
-                        <!-- <Border BackgroundColor="White">
-                            
-                            <Grid ColumnDefinitions="Auto, *" RowSpacing="0" Margin="7, 5, 7, 10" >
-                                <Grid>
-                                    <Image Source="{Binding image}"   WidthRequest="40" HeightRequest="40"  />
-                                </Grid>
-                                
-                                <Grid Grid.Column="1" ColumnDefinitions="*, Auto" >
-                                    <StackLayout Margin="5,0,0,0" Grid.Column="0">
-                                            <Grid ColumnDefinitions="*, *" >
-                                            <Label Grid.Column="0"  Text="{Binding name}" Style="{StaticResource NameTextStyle}" />
-                                            <Label Grid.Column="01"  Margin="10, 0, 0,0" Text="{Binding date}" FontSize="12" TextColor="Black" FontFamily="Metropolis Regular"/>
-                                            </Grid>
-
-                                        <Label Text="{Binding chattext}" Style="{StaticResource ChatTextStyle}" TextColor="Black" />
-                                       
-                                    </StackLayout>
-                                    
-                                </Grid>
-                            </Grid>
-                        </Border>-->
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-       
+      
+        <!-- The Input -->
         <StackLayout Grid.Row="2">
             <Border  StrokeThickness="2">
                 <Entry BackgroundColor="White" TextColor="Black" Margin="8, 0" Text="{Binding ChatSend}"  />
             </Border>
-            
             <Grid ColumnDefinitions="*, *">
-                
-                <Button Text="TILBAGE" BackgroundColor="BurlyWood" TextColor="Black" Margin="5" Command="{Binding BackCommand}"/>
-                <Button Grid.Column="1" Text="SEND" BackgroundColor="BurlyWood" TextColor="Black" Margin="5" Command="{Binding SendChatCommand}"/>
+                <Button Text="TILBAGE" Command="{Binding BackCommand}" Style="{StaticResource ChatButton}"/>
+                <Button Grid.Column="1" Text="SEND" Command="{Binding SendChatCommand}" Style="{StaticResource ChatButton}"/>
             </Grid>
-           
         </StackLayout>
         
     </Grid>

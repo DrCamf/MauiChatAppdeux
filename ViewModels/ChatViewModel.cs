@@ -47,7 +47,14 @@ namespace MauiChatAppdeux.ViewModels
 
         private async Task BackTappedAsync()
         {
-           
+            // Get current page
+            //var page = Application.Current.MainPage.Navigation.NavigationStack.LastOrDefault();
+
+            // Load new page
+            //await Shell.Current.GoToAsync(nameof(Chat1Page), false);
+
+            // Remove old page
+            //Application.Current.MainPage.Navigation.RemovePage(page);
             await Shell.Current.GoToAsync("//middle/chatarea");
         }
 

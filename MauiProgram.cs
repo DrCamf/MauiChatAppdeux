@@ -39,16 +39,17 @@ public static class MauiProgram
 
         //views
         builder.Services.AddTransient<ChatPage>();
+        builder.Services.AddTransient<Chat1Page>();
         builder.Services.AddTransient<ChatRooms>();
         builder.Services.AddTransient<RegisterPage>();
         builder.Services.AddSingleton<HomeView>();
 
 
         //viewmodel
-        builder.Services.AddTransient<ChatRoomsViewModel>();
-        builder.Services.AddTransient<ChatViewModel>();
+        builder.Services.AddSingleton<ChatRoomsViewModel>();
+        builder.Services.AddSingleton<ChatViewModel>();
         builder.Services.AddSingleton<LoginViewModel>();
-        builder.Services.AddTransient<RegistrationViewModel>();
+        builder.Services.AddSingleton<RegistrationViewModel>();
 
 
         return builder.Build();

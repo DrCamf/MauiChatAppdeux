@@ -25,9 +25,9 @@ namespace MauiChatAppdeux.ViewModels
         public Area SelectedArea { get; set; }
         ObservableCollection<Area> _area;
         public Command SelectedAreas { get; }
-        private int areanbr;
+       
         public int Areanbr { get; set; }
-        ObservableCollection<Page> _pages;
+        
         
 
 
@@ -115,8 +115,7 @@ namespace MauiChatAppdeux.ViewModels
             Areas = new ObservableCollection<Area>(ChatAreaServices.Instance.GetAllAreas());
         }
 
-       public ObservableCollection<Page> pages
-        { get { return _pages; } }
+      
        
         public List<Area> AreasCollection
         {
