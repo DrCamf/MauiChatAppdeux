@@ -24,7 +24,7 @@ namespace MauiChatAppdeux.Services
             }
         }
 
-        public static List<Message> GetLastFittyChats(int id) 
+        public async Task<List<Message>> GetLastFittyChats(int id) 
         {
             //Adress of API
             var url = "https://mauichat.elthoro.dk";
@@ -34,7 +34,7 @@ namespace MauiChatAppdeux.Services
             var apiurl = "/?pass=chat&item=fifty&id=" + id;
             var request = new RestRequest(apiurl, Method.Get);
 
-            RestResponse response =  client.Execute(request);
+            RestResponse response = await client.ExecuteAsync(request);
 
             if (response.IsSuccessful)
             {

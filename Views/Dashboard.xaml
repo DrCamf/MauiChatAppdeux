@@ -9,5 +9,7 @@
             Text="Maui Chat App!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label Text="TEST" FontSize="Large" VerticalOptions="Center" 
+            HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

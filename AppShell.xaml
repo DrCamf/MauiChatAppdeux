@@ -23,5 +23,6 @@
         <ShellContent  Route="chat2" ContentTemplate="{DataTemplate local:Chat2Page}" />
         <ShellContent  Route="chat3" ContentTemplate="{DataTemplate local:Chat3Page}" />
         <ShellContent  Route="chat4" ContentTemplate="{DataTemplate local:Chat4Page}" />
+        <ShellContent  Route="Dash" ContentTemplate="{DataTemplate local:Dashboard}" />
     </TabBar>
 </Shell>

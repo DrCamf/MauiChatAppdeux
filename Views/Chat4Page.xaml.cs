@@ -4,9 +4,9 @@ namespace MauiChatAppdeux;
 
 public partial class Chat4Page : ContentPage
 {
-	public Chat4Page()
+	public Chat4Page(ChatViewModel viewModel)
 	{
 		InitializeComponent();
-        BindingContext = new ChatViewModel(4);
+        BindingContext = viewModel;
     }
 }

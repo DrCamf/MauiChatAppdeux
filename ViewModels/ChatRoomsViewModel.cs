@@ -68,28 +68,38 @@ namespace MauiChatAppdeux.ViewModels
             // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
             //var response = ChatAreaServices.Instance.GetArea(SelectedArea.id);
 
-           // await AppShell.Current.DisplayAlert("AHHA", SelectedArea.id.ToString(), "OK");
-            App.ChosenArea = SelectedArea;
+            // await AppShell.Current.DisplayAlert("AHHA", SelectedArea.id.ToString(), "OK");
+            var myExistingPageList = Shell.Current.Navigation.NavigationStack.ToList();
+            await AppShell.Current.DisplayAlert("Area", "antal " + myExistingPageList.Count.ToString(), "OK");
 
-           // await AppShell.Current.DisplayAlert("AHHA", App.ChosenArea.id.ToString(), "OK");
-
-            switch(SelectedArea.id)
+            // await AppShell.Current.DisplayAlert("AHHA", App.ChosenArea.id.ToString(), "OK");
+            
+            switch (SelectedArea.id)
             {
                 case 1:
+                    App.ChosenArea.id= 1;
                     App.ChosenArea.name = "World war 1";
                     await Shell.Current.GoToAsync($"//inside/chat1");
                     break;
                 case 2:
+                    App.ChosenArea.id = 2;
                     App.ChosenArea.name = "World war 2";
-                    await Shell.Current.GoToAsync($"//inside/chat2");
+                    await Shell.Current.GoToAsync($"//inside/chat1");
                     break; 
                 case 3:
+                    App.ChosenArea.id = 3;
                     App.ChosenArea.name = "Franco-Prussian War";
-                    await Shell.Current.GoToAsync($"//inside/chat3");
+                    await Shell.Current.GoToAsync($"//inside/chat1");
                     break;
                 case 4:
+                    App.ChosenArea.id = 4;
                     App.ChosenArea.name = "Vietnam War";
-                    await Shell.Current.GoToAsync($"//inside/chat4");
+                    await Shell.Current.GoToAsync($"//inside/chat1");
+                    break;
+                case 5:
+                    App.ChosenArea.id = 5;
+                    App.ChosenArea.name = "Korean War";
+                    await Shell.Current.GoToAsync($"//inside/Dash");
                     break;
             }
 

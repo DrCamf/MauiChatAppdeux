@@ -57,22 +57,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Chat1Page.xaml">
+	  <MauiXaml Update="Views\Chat1Page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Chat2Page.xaml">
+	  <MauiXaml Update="Views\Chat2Page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Chat3Page.xaml">
+	  <MauiXaml Update="Views\Chat3Page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Chat4Page.xaml">
+	  <MauiXaml Update="Views\Chat4Page.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ChatDetail.xaml">
+	  <MauiXaml Update="Views\ChatDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ChatPage.xaml">
+	  <MauiXaml Update="Views\ChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\PageStyle.xaml">
@@ -84,7 +84,7 @@
 	  <MauiXaml Update="RegisterPage.xaml">
 	    <Generator></Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ChatRooms.xaml">
+	  <MauiXaml Update="Views\ChatRooms.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="HomeView.xaml">

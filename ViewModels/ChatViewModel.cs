@@ -1,8 +1,12 @@
 ﻿
 
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiChatAppdeux.Models;
 using MauiChatAppdeux.Services;
 using MauiChatAppdeux.ViewModels.Base;
+using MauiChatAppdeux.Views.Templates;
+using Microsoft.Maui.Networking;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,51 +15,110 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows.Input;
 
 namespace MauiChatAppdeux.ViewModels
 {
-    public class ChatViewModel : ViewModelBase
+    public partial class ChatViewModel : ViewModelBase
     {
-        public ObservableCollection<Message> messageCollection = new ObservableCollection<Message>();
+        public ObservableCollection<Message> MessagesCollection { get; } = new();
         //private List<Message> messageCollection = new List<Message>();
-        
-        public string AreaName { get; set; }
+        private string areaname;
+        public string AreaName { get { return areaname; }
+            set
+            {
+                areaname = value;
+                OnPropertyChanged();
+            }
+        }
         private string chatsend;
         private int count;
         public string ChatSend { 
             get => chatsend; 
             set => SetProperty(ref chatsend, value); 
         }
+        private readonly Task initTask;
+        public RefreshView refreshView { get; set; }
 
+        [ObservableProperty]
+        bool isRefreshing;
+
+        public Command LoadCommand { get; }
+        public Command RefreshCommand { get; }
         public Command SendChatCommand { get; }
         public Command BackCommand { get; }
-
-        public ChatViewModel(int id)
+       
+        ChatServices chatServices;
+       
+        public ChatViewModel( ChatServices chatServices)
         {
             Shell.Current.Navigation.PopAsync();
-            App.ChosenArea.id = id;
+            
             count= 0;
             // AppShell.Current.DisplayAlert("Chat", App.ChosenArea.id.ToString(), "OK");
-
-            LoadData(id);
+           
+            this.chatServices = chatServices;
 
             SendChatCommand =  new Command(async () => await SendChatTappedAsync());
             BackCommand = new Command(async () => await BackTappedAsync());
+            LoadCommand = new Command(async () => await LoadData());
+            refreshView = new RefreshView();
+
+            this.initTask = InitAsync();
+
+
+            RefreshCommand = new Command(async () => await RefreshChat());
+          
+            refreshView.Command = RefreshCommand;
+            AreaName = App.ChosenArea.name;
+            ScrollView scrollView = new ScrollView();
+            //FlexLayout flexLayout = new FlexLayout { ... };
+            //scrollView.Content = ChatTemplate;
+            //refreshView.Content = scrollView;
+
+
         }
+
+        public ChatViewModel()
+        {
+        }
+
+        private async Task InitAsync()
+        {
+            await LoadData();
+        }
+
+        private async Task RefreshChat()
+        {
+            {
+                if (refreshView.IsRefreshing)
+                {
+                    await LoadData();
+                    await AppShell.Current.DisplayAlert("Chat", "Ikke uploaded", "OK");
+                }
+                refreshView.IsRefreshing = false;
+
+            }
+        }
+
+        
 
         public int Count { get { return count; } set { count = value; OnPropertyChanged(); } }
 
         private async Task BackTappedAsync()
         {
+            //await LoadData();
             // Get current page
-            //var page = Application.Current.MainPage.Navigation.NavigationStack.LastOrDefault();
+            
+            var page = Shell.Current.CurrentPage;
 
             // Load new page
-            //await Shell.Current.GoToAsync(nameof(Chat1Page), false);
-
+            await Shell.Current.GoToAsync("//middle/chatarea", false);
+            MessagesCollection.Clear();
+            AreaName = "";
             // Remove old page
-            //Application.Current.MainPage.Navigation.RemovePage(page);
-            await Shell.Current.GoToAsync("//middle/chatarea");
+            Application.Current.MainPage.Navigation.RemovePage(page);
+            //await Shell.Current.GoToAsync("//middle/chatarea");
         }
 
         private async Task SendChatTappedAsync()
@@ -77,9 +140,9 @@ namespace MauiChatAppdeux.ViewModels
                 if (response)
                 {
                     ChatSend = "";
-                    Count += 1;
-                    //await Shell.Current.GoToAsync($"//inside/chat");
                    
+                    //await Shell.Current.GoToAsync($"//inside/chat");
+                    await LoadData();
 
                     //await AppShell.Current.DisplayAlert("Chat", "tekst: " + message.chattext + " time: " +  message.time + " Uid: " + message.user_id + " areaId: " + message.chatarea_id, "OK");
                 }
@@ -104,25 +167,56 @@ namespace MauiChatAppdeux.ViewModels
                // OnPropertyChanged();
             }
         }*/
-        public ObservableCollection<Message> MessagesCollection
+       
+        [RelayCommand]
+        async Task LoadData()
         {
-            get { return messageCollection; }
-            set { messageCollection = value; }
-        }
-
-        public void LoadData(int id)
-        {
-
-            var response = new ObservableCollection<Message>(ChatServices.GetLastFittyChats(id));
-            foreach (Message message in response.ToArray())
+            //await AppShell.Current.DisplayAlert("Chat", "ID: " + App.ChosenArea.id.ToString(), "OK");
+            AreaName = App.ChosenArea.name;
+            if (IsBusy)
             {
-                message.image = "https://mauichat.elthoro.dk/" + message.image;
-                MessagesCollection.Add(message);
-                AreaName = message.area;
+                return;
             }
-             
+
+            try
+            {
+                /*if (connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("No connectivity!",
+                                        $"Please check internet and try again.", "OK");
+                    return;
+                }*/
+
+                IsBusy = true;
+                var response = await chatServices.GetLastFittyChats(App.ChosenArea.id);
+                if(MessagesCollection.Count != 0)
+                {
+                    MessagesCollection.Clear();
+                }
+                foreach (Message message in response.ToArray())
+                {
+                    message.image = "https://mauichat.elthoro.dk/" + message.image;
+                    MessagesCollection.Add(message);
+                    AreaName = message.area;
+                }
+
+
+            } catch (Exception ex) 
+            {
+                //Debug.WriteLine($"Unable to get Message: {ex.Message}");
+                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
+
         }
 
-        
+      
     }
+
+    
 }
