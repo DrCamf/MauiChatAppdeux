@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -26,9 +27,9 @@ namespace MauiChatAppdeux.ViewModels
         ObservableCollection<Area> _area;
         public Command SelectedAreas { get; }
        
-        public int Areanbr { get; set; }
-        
-        
+      
+       
+
 
 
         public ChatRoomsViewModel()
@@ -66,35 +67,51 @@ namespace MauiChatAppdeux.ViewModels
             var toast = Toast.Make(text + " hej", duration);
             await toast.Show(cancellationTokenSource.Token);*/
             // await this._navigation.PushAsync(new ChatPage(SelectedArea.Id));
-            //var response = ChatAreaServices.Instance.GetArea(SelectedArea.id);
+            
 
-            // await AppShell.Current.DisplayAlert("AHHA", SelectedArea.id.ToString(), "OK");
-            var myExistingPageList = Shell.Current.Navigation.NavigationStack.ToList();
-            await AppShell.Current.DisplayAlert("Area", "antal " + myExistingPageList.Count.ToString(), "OK");
+            
+            //var myExistingPageList = Shell.Current.Navigation.NavigationStack.ToList();
+            //await AppShell.Current.DisplayAlert("Area", "antal " + myExistingPageList.Count.ToString(), "OK");
 
             // await AppShell.Current.DisplayAlert("AHHA", App.ChosenArea.id.ToString(), "OK");
-            
+            //var response = ChatAreaServices.Instance.GetArea(SelectedArea.id);
+            //await AppShell.Current.DisplayAlert("AHHA", response.id.ToString(), "OK");
+            //App.ChosenArea.id = SelectedArea.id;
+            //App.ChosenArea.name = response.name;
+            //App.ChosenArea.image = response.image;
+
+            App.ChosenArea.id = SelectedArea.id;
+            App.ChosenArea.name = SelectedArea.name;
+            await Shell.Current.GoToAsync($"//inside/chat1");
+            /*
             switch (SelectedArea.id)
             {
+               
                 case 1:
                     App.ChosenArea.id= 1;
                     App.ChosenArea.name = "World war 1";
+                   
                     await Shell.Current.GoToAsync($"//inside/chat1");
+                     
                     break;
                 case 2:
                     App.ChosenArea.id = 2;
                     App.ChosenArea.name = "World war 2";
+                   
                     await Shell.Current.GoToAsync($"//inside/chat1");
+                   
                     break; 
                 case 3:
                     App.ChosenArea.id = 3;
                     App.ChosenArea.name = "Franco-Prussian War";
                     await Shell.Current.GoToAsync($"//inside/chat1");
+                   
                     break;
                 case 4:
                     App.ChosenArea.id = 4;
                     App.ChosenArea.name = "Vietnam War";
                     await Shell.Current.GoToAsync($"//inside/chat1");
+                   
                     break;
                 case 5:
                     App.ChosenArea.id = 5;
@@ -102,7 +119,7 @@ namespace MauiChatAppdeux.ViewModels
                     await Shell.Current.GoToAsync($"//inside/Dash");
                     break;
             }
-
+            */
 
 
             //await AppShell.Current.DisplayAlert("Area", App.ChosenArea.id.ToString(), "OK");

@@ -94,7 +94,7 @@ namespace MauiChatAppdeux.ViewModels
                             string userDetailStr = JsonConvert.SerializeObject(userinfo);
                             Preferences.Set(nameof(App.UserDetails), userDetailStr);
                             App.UserDetails = userinfo;
-
+                            //await AppShell.Current.DisplayAlert("Invalid User", "ID " + App.UserDetails.id, "OK");
                             //await AppShell.Current.DisplayAlert("valid User", "correct", "OK");
                             await Shell.Current.GoToAsync("//middle/chatarea");
                         }

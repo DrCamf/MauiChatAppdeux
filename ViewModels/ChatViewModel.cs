@@ -55,7 +55,7 @@ namespace MauiChatAppdeux.ViewModels
             Shell.Current.Navigation.PopAsync();
             
             count= 0;
-            // AppShell.Current.DisplayAlert("Chat", App.ChosenArea.id.ToString(), "OK");
+            //AppShell.Current.DisplayAlert("Chat", App.UserDetails.id.ToString(), "OK");
            
             this.chatServices = chatServices;
 
@@ -71,7 +71,7 @@ namespace MauiChatAppdeux.ViewModels
           
             refreshView.Command = RefreshCommand;
             AreaName = App.ChosenArea.name;
-            ScrollView scrollView = new ScrollView();
+            //ScrollView scrollView = new ScrollView();
             //FlexLayout flexLayout = new FlexLayout { ... };
             //scrollView.Content = ChatTemplate;
             //refreshView.Content = scrollView;
@@ -129,16 +129,20 @@ namespace MauiChatAppdeux.ViewModels
                 DateTime tid = DateTime.Now;
                 string tidStr = tid.ToString("u");
                 SendMessage message = new SendMessage();
-
+                Notification notification = new Notification();
                 message.chattext = ChatSend;
                 message.user_id = App.UserDetails.id;
                 message.chatarea_id = App.ChosenArea.id;
                 message.time = tidStr.Remove(tidStr.Length - 1, 1);
-
+                notification.userid = App.UserDetails.id;
+                notification.areaid = App.ChosenArea.id;
+                notification.isread = 0;
 
                 bool response = await ChatServices.Instance.InsertMessage(message);
                 if (response)
                 {
+                    bool note = await ChatServices.Instance.InsertNotification(notification);
+                    //if (note) { await AppShell.Current.DisplayAlert("Notification", "uid " + notification.userid + " aid" + notification.areaid + " is " + notification.isread, "OK"); }
                     ChatSend = "";
                    
                     //await Shell.Current.GoToAsync($"//inside/chat");
@@ -169,7 +173,7 @@ namespace MauiChatAppdeux.ViewModels
         }*/
        
         [RelayCommand]
-        async Task LoadData()
+        public async Task LoadData()
         {
             //await AppShell.Current.DisplayAlert("Chat", "ID: " + App.ChosenArea.id.ToString(), "OK");
             AreaName = App.ChosenArea.name;
@@ -199,7 +203,9 @@ namespace MauiChatAppdeux.ViewModels
                     MessagesCollection.Add(message);
                     AreaName = message.area;
                 }
-
+               // var nbr = await chatServices.GetNotifications();
+                //Count = nbr;
+               // await AppShell.Current.DisplayAlert("Chat", "count: " + nbr.ToString(), "OK");
 
             } catch (Exception ex) 
             {

@@ -77,5 +77,59 @@ namespace MauiChatAppdeux.Services
             
            
         }
+
+        public async Task<bool> InsertNotification(Notification notification)
+        {
+            var url = "https://mauichat.elthoro.dk";
+            var client = new RestClient(url);
+            var apiurl = "/?pass=notification";
+
+            var request = new RestRequest(apiurl, Method.Post);
+            string output = JsonConvert.SerializeObject(notification);
+
+            //AppShell.Current.DisplayAlert("Chat", "tekst: " + output, "OK");
+            RestResponse response;
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            request.AddJsonBody(output);
+            try
+            {
+                response = await client.ExecuteAsync(request);
+
+                if (response.IsSuccessful)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex) { return false; }
+
+        }
+
+        public async Task<int> GetNotifications()
+        {
+            //Adress of API
+            var url = "https://mauichat.elthoro.dk";
+            var client = new RestClient(url);
+
+            //The keys for the right API search
+            var apiurl = "/?pass=chat&item=" + App.ChosenArea.id + "&id=" + App.UserDetails.id;
+            var request = new RestRequest(apiurl, Method.Get);
+
+            RestResponse response = await client.ExecuteAsync(request);
+
+            if (response.IsSuccessful)
+            {
+                return JsonConvert.DeserializeObject<int>(response.Content);
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
     }
 }
